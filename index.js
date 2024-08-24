@@ -1,11 +1,14 @@
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
 const errorHandler = require("./middlewares/errorHandler");
 const sequelize = require("./config/database");
+const helmet = require("helmet");
+const cors = require("cors");
 
-const PORT = process.env.PORT || 3000;
-app.use(bodyParser.json());
+const PORT = process.env.PORT || 5000;
+app.use(cors());
+app.use(helmet());
+app.use(express.json());
 
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/profile", require("./routes/profileRoutes"));
